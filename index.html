@@ -3,26 +3,35 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Valentine ❤️</title>
+<title>For Jeel ❤️</title>
 
 <style>
 body {
     margin: 0;
     font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(135deg, #ff4e50, #f9d423);
     color: white;
     text-align: center;
     overflow-x: hidden;
+    background: linear-gradient(-45deg, #ff758c, #ff7eb3, #fad0c4, #ffd1ff);
+    background-size: 400% 400%;
+    animation: gradientBG 12s ease infinite;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 h1 {
     margin-top: 60px;
-    font-size: 2.5rem;
+    font-size: 2.4rem;
+    padding: 0 10px;
 }
 
 button {
-    padding: 15px 30px;
-    font-size: 1.4rem;
+    padding: 15px 32px;
+    font-size: 1.3rem;
     border: none;
     border-radius: 40px;
     cursor: pointer;
@@ -37,6 +46,8 @@ button {
     background: #e74c3c;
     color: white;
     position: absolute;
+    top: 70%;
+    left: 55%;
 }
 
 #content {
@@ -55,6 +66,7 @@ button {
 .video-container {
     margin-top: 30px;
     max-width: 600px;
+    aspect-ratio: 16 / 9;
     margin-left: auto;
     margin-right: auto;
 }
@@ -62,14 +74,15 @@ button {
 .video-container iframe {
     width: 100%;
     height: 100%;
-    border-radius: 5%;
+    border-radius: 20px;
     border: none;
 }
 
 .love-message {
-    font-size: 1.8rem;
+    font-size: 1.7rem;
     margin: 40px 10px;
-    min-height: 120px;
+    min-height: 140px;
+    white-space: pre-line;
 }
 
 /* floating hearts */
@@ -78,11 +91,24 @@ button {
     bottom: -20px;
     font-size: 24px;
     animation: float 6s linear infinite;
+    opacity: 0.9;
 }
 
 @keyframes float {
     0% { transform: translateY(0); opacity: 1; }
     100% { transform: translateY(-100vh); opacity: 0; }
+}
+
+/* heart burst */
+.burst {
+    position: fixed;
+    font-size: 26px;
+    animation: burst 1.5s ease-out forwards;
+}
+
+@keyframes burst {
+    0% { transform: scale(0); opacity: 1; }
+    100% { transform: scale(2.5); opacity: 0; }
 }
 </style>
 </head>
@@ -94,8 +120,13 @@ button {
 </audio>
 
 <div id="question">
-    <h1>Will you be my Valentine? ❤️</h1>
-    <button id="yesBtn">YES 💖</button>
+    <h1>
+        Jeel, my bacchu ☀️<br>
+        Will you be my Valentine…<br>
+        today, tomorrow,<br>
+        and every lifetime? ❤️
+    </h1>
+    <button id="yesBtn">YES, FOREVER 💖</button>
     <button id="noBtn">NO 💔</button>
 </div>
 
@@ -112,7 +143,6 @@ button {
         <img src="photos/pic7.jpg">
     </div>
 
-    <!-- Google Drive Video -->
     <div class="video-container">
         <iframe
             src="https://drive.google.com/file/d/1gXwba5sfz3m6jGYnJo85x7rPsIstfJa_/preview"
@@ -125,7 +155,7 @@ button {
 </div>
 
 <script>
-/* NO button run away */
+/* NO button escape */
 const noBtn = document.getElementById("noBtn");
 noBtn.addEventListener("mouseover", () => {
     const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
@@ -143,7 +173,13 @@ document.getElementById("yesBtn").onclick = () => {
 };
 
 /* typing effect */
-const message = "My love, every picture here is a memory, every second of this video is a promise, and every beat of my heart belongs to you. Thank you for being my Valentine, my wife, my forever ❤️";
+const message =
+"Jeel… my world, my bacchu, my sunshine ☀️❤️\n\n" +
+"Every picture here is a memory I live for, and every second of this video is a promise from my heart.\n\n" +
+"You make my normal days magical, my bad days softer, and my life complete.\n\n" +
+"I don’t just choose you as my Valentine… I choose you every single day, in every lifetime, in every universe.\n\n" +
+"Come here, my Valentine.\nI love you forever ❤️";
+
 let index = 0;
 
 function startTyping() {
@@ -151,8 +187,11 @@ function startTyping() {
     const interval = setInterval(() => {
         typingDiv.innerHTML += message[index];
         index++;
-        if (index === message.length) clearInterval(interval);
-    }, 50);
+        if (index === message.length) {
+            clearInterval(interval);
+            heartBurst();
+        }
+    }, 45);
 }
 
 /* floating hearts */
@@ -163,7 +202,20 @@ setInterval(() => {
     heart.style.left = Math.random() * 100 + "vw";
     document.body.appendChild(heart);
     setTimeout(() => heart.remove(), 6000);
-}, 300);
+}, 250);
+
+/* heart fireworks */
+function heartBurst() {
+    for (let i = 0; i < 25; i++) {
+        const burst = document.createElement("div");
+        burst.className = "burst";
+        burst.innerHTML = "💖";
+        burst.style.left = Math.random() * 100 + "vw";
+        burst.style.top = Math.random() * 100 + "vh";
+        document.body.appendChild(burst);
+        setTimeout(() => burst.remove(), 1500);
+    }
+}
 </script>
 
 </body>
